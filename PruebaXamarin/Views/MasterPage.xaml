@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:PruebaXamarin.Views"
+             xmlns:Effectos="clr-namespace:PruebaXamarin.Effects"
+             mc:Ignorable="d"
+             x:Class="PruebaXamarin.Views.MasterPage"
+             Title="Hello?"
+             Visual="Material" 
+             BackgroundColor="#1C2F37">
+    
+    <StackLayout VerticalOptions="FillAndExpand">
+        <ListView x:Name="listView" x:FieldModifier="public" SeparatorVisibility="None" >
+            <ListView.ItemsSource>
+                <x:Array Type="{x:Type local:MasterPageItem}">
+                    <local:MasterPageItem Title="Productos" IconSource="baseline_inbox_24" TargetType="{x:Type local:ProductosListPage}"/>
+                    <local:MasterPageItem Title="Reportes" IconSource="baseline_description_24" />
+                    <local:MasterPageItem Title="Perfil" IconSource="baseline_account_circle_24"/>
+                    <local:MasterPageItem Title="Configuracion" IconSource="baseline_settings_24"/>
+                    <local:MasterPageItem Title="Cerrar Sesion" IconSource="baseline_login_24"/>
+                </x:Array>
+            </ListView.ItemsSource>
+
+            <ListView.Header>
+                <RelativeLayout>
+
+                    <Frame x:Name="circleFrame" 
+                           IsClippedToBounds="True"
+                           HasShadow="False"
+                           HeightRequest="100"
+                           WidthRequest="100"
+                           RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=X, Factor=.5, Constant = 100}" 
+                           RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Factor=0, Property=Y, Constant=30}"
+                           Padding="0" 
+                           Margin="0" 
+                           VerticalOptions="Center" 
+                           HorizontalOptions="Center">
+                        <Image x:Name="circleImg" Source="profile.jpeg"/>
+                        <Frame.CornerRadius>
+                            <OnPlatform x:TypeArguments="x:Single">
+                                <On Platform="ios" Value="10"/>
+                                <On Platform="Android" Value="50"/>
+                            </OnPlatform>
+                        </Frame.CornerRadius>
+                    </Frame>
+                    
+                                <!--<Image
+                                     x:Name="imageCircleBack"
+                                     BackgroundColor="Maroon" 
+                                     HeightRequest="100" 
+                                     WidthRequest="100" 
+                                     RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=X, Factor=.5, Constant = 100}" 
+                                     RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Factor=0, Property=Y, Constant=30}" />-->
+                                <!--<Button BorderRadius="30" 
+                                        BackgroundColor="Red" 
+                                        HeightRequest="60"
+                                        WidthRequest="60" 
+                                        RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=circleFrame, Property=X, Factor=0,Constant=120}" 
+                                        RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Factor=0, Property=Y, Constant=70}" />-->
+                    <Label Text="Usuario AyB"
+                           TextColor="White" 
+                           x:Name="nickname"
+                           FontAttributes="Bold" 
+                           FontSize="24"
+                           HorizontalTextAlignment="Center" 
+                           RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0, Constant=130}" 
+                           RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}" />
+                    <Label Text="Administrador" 
+                           TextColor="White" 
+                           FontAttributes="Bold" 
+                           FontSize="16"
+                           HorizontalTextAlignment="Center" 
+                           RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=nickname, Property=Y, Factor=0, Constant=160}" 
+                           RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}" />
+                </RelativeLayout>
+            </ListView.Header>
+            
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Margin="25,0,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="{Binding IconSource}">
+                                <Image.Effects>
+                                    <Effectos:TintImageEffect TintColor="White"/>
+                                </Image.Effects>
+                            </Image>
+                                <Label Grid.Column="1" Text="{Binding Title}" TextColor="White" FontAttributes="Bold" VerticalOptions="Center"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

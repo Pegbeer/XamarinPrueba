@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:PruebaXamarin.ViewModels"
+             mc:Ignorable="d"
+             x:Class="PruebaXamarin.Views.ProductosListPage"
+             Title="Productos"
+             Visual="Material"
+             BackgroundColor="#AFD5DD">
+
+    <ContentPage.BindingContext>
+        <vm:ProductoViewModel/>
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <Button Text="Nuevo producto"
+                    x:Name="Add"
+                    Clicked="Add_Clicked"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    ImageSource="baseline_add_white_24"
+                    CornerRadius="10"
+                    BackgroundColor="MidnightBlue"
+                    HorizontalOptions="CenterAndExpand"
+                    Margin="0,10"/>
+
+            <Label Text="Toque un producto para editarlo"  HorizontalOptions="Center"/>
+            <StackLayout Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="StartAndExpand" Spacing="90" Margin="15,0,0,0">
+                <Label Text="ID" FontAttributes="Bold" FontSize="18" TextColor="Black"/>
+                <Label Text="Nombre" FontAttributes="Bold" FontSize="18" TextColor="Black"/>
+            </StackLayout>
+            <ActivityIndicator x:Name="indicador" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <ListView x:Name="Lista" ItemTapped="Lista_ItemTapped" ItemsSource="{Binding _Productos}" Margin="15,0,15,15" BackgroundColor="#BDD2F1" VerticalOptions="Center">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand" VerticalOptions="Center" Spacing="90" Margin="15,0,0,0">
+                                <Label  Text="{Binding Id}" FontAttributes="Bold"/>
+                                <Label Text="{Binding Nombre}" FontAttributes="Bold"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+
+        
+    </ContentPage.Content>
+</ContentPage>

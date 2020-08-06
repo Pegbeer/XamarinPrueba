@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Effectos="clr-namespace:PruebaXamarin.Effects"
+             xmlns:vm="clr-namespace:PruebaXamarin.ViewModels"
+             mc:Ignorable="d"
+             x:Class="PruebaXamarin.Views.StartPage"
+             BackgroundColor="#AFD5DD"
+             Title="Inventario AyB"
+             Visual="Material">
+
+    
+    <StackLayout VerticalOptions="CenterAndExpand">
+        <StackLayout>
+            <Button x:Name="productsListBtn"
+                Clicked="productsListBtn_Clicked"
+                Text="Productos" 
+                ImageSource="baseline_inbox_white_36" 
+                Margin="20,0,20,0" 
+                BackgroundColor="MidnightBlue" 
+                TextColor="White"
+                FontAttributes="Bold"
+                FontSize="18"
+                HeightRequest="70"
+                CornerRadius="10"/>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand"  Padding="20,0,20,0">
+            <Button Text="Nueva&#10;Entrada"
+                    x:Name="newEntryBtn"
+                    Clicked="newEntryBtn_Clicked"
+                    BackgroundColor="MidnightBlue"
+                    TextColor="White"
+                    ImageSource="baseline_arrow_circle_down_white_24"
+                    FontAttributes="Bold"
+                    CornerRadius="10"
+                    HeightRequest="70"
+                    WidthRequest="155"
+                    HorizontalOptions="FillAndExpand"/>
+            <Button Text="Nueva&#10;Salida"
+                    ImageSource="baseline_arrow_circle_up_white_24"
+                    BackgroundColor="MidnightBlue"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="10"
+                    HeightRequest="70"
+                    WidthRequest="155"
+                    HorizontalOptions="FillAndExpand"/>
+        </StackLayout>
+        <StackLayout>
+            <Button 
+                    Text="Reportes"
+                    ImageSource="baseline_description_white_36"
+                    Margin="20,0,20,0"
+                    BackgroundColor="MidnightBlue"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    FontSize="18"
+                    CornerRadius="10"
+                    HeightRequest="70"/>
+        </StackLayout>
+    </StackLayout>
+    
+</ContentPage>

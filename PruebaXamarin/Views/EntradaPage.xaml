@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:PruebaXamarin.ViewModels"
+             mc:Ignorable="d"
+             x:Class="PruebaXamarin.Views.EntradaPage"
+             Title="Nueva Entrada"
+             BackgroundColor="#AFD5DD"
+             Visual="Material">
+    <ContentPage.BindingContext>
+        <vm:ProductoViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry x:Name="cantTxt"
+                   Placeholder="N°:"
+                   BackgroundColor="White"
+                   PlaceholderColor="MidnightBlue"
+                   Text="{Binding Aumento, Mode=TwoWay}"
+                   Margin="15,10,15,0"/>
+            <Button Text="Añadir"
+                    Command="{Binding AumentarBtnCommand}"
+                    BackgroundColor="MidnightBlue"
+                    HorizontalOptions="Start"
+                    Margin="15,0,0,0"/>
+            <ActivityIndicator x:Name="indicador" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <ListView x:Name="Lista" ItemsSource="{Binding Productos}" SelectedItem="{Binding SelectedProducto}"  VerticalOptions="Center" Margin="15,0,15,15" BackgroundColor="#BDD2F1">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand" VerticalOptions="Center" Margin="15,0,0,0" Spacing="90">
+                                <Label Text="{Binding Cantidad,Mode=TwoWay}" FontAttributes="Bold"/>
+                                <Label Text="{Binding Nombre, Mode=OneWay}" FontAttributes="Bold"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button Text="Guardar Entrada"
+                    Command="{Binding UpdateBtnCommand}"
+                    BackgroundColor="MidnightBlue"
+                    HorizontalOptions="Center"
+                    Margin="0,0,0,15"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
