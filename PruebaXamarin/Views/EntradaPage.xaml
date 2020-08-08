@@ -9,6 +9,7 @@
              Title="Nueva Entrada"
              BackgroundColor="#AFD5DD"
              Visual="Material">
+    
     <ContentPage.BindingContext>
         <vm:ProductoViewModel/>
     </ContentPage.BindingContext>
@@ -18,7 +19,7 @@
                    Placeholder="N°:"
                    BackgroundColor="White"
                    PlaceholderColor="MidnightBlue"
-                   Text="{Binding Aumento, Mode=TwoWay}"
+                   Text="{Binding Entrada, Mode=TwoWay}"
                    Margin="15,10,15,0"/>
             <Button Text="Añadir"
                     Command="{Binding AumentarBtnCommand}"
@@ -26,7 +27,7 @@
                     HorizontalOptions="Start"
                     Margin="15,0,0,0"/>
             <ActivityIndicator x:Name="indicador" HorizontalOptions="Center" VerticalOptions="Center"/>
-            <ListView x:Name="Lista" ItemsSource="{Binding Productos}" SelectedItem="{Binding SelectedProducto}"  VerticalOptions="Center" Margin="15,0,15,15" BackgroundColor="#BDD2F1">
+            <ListView x:Name="Lista" ItemsSource="{Binding NewProductos}" SelectedItem="{Binding SelectedProducto, Mode=TwoWay}"  VerticalOptions="Center" Margin="15,0,15,15" BackgroundColor="#BDD2F1">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

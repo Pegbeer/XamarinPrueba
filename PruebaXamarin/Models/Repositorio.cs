@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -13,12 +14,23 @@ namespace PruebaXamarin.Models
 {
     public class Repositorio
     {
-        public Repositorio()
+        public async Task<Productos> GetProductosByIdAsync(int id)
         {
+            try
+            {
+                HttpClient client = new HttpClient();
+                var response = await client.GetAsync("https://pruebaxamarinapi.azurewebsites.net/api/productos/"+id);
+                var jsonstring = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<Productos>(jsonstring);
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
         }
 
-        public async Task<List<Productos>>GetProductosAsync()
+        public async Task<ObservableCollection<Productos>>GetProductosAsync()
         {
             try
             {
@@ -27,7 +39,7 @@ namespace PruebaXamarin.Models
                 
                 
                     var jsonstring = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<List<Productos>>(jsonstring).ToList();
+                    return JsonConvert.DeserializeObject<ObservableCollection<Productos>>(jsonstring);
             }
             catch (Exception)
             {

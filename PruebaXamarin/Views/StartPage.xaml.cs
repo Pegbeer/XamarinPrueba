@@ -23,9 +23,9 @@ namespace PruebaXamarin.Views
             await Navigation.PushAsync(new ProductosListPage());
         }
 
-        private void newEntryBtn_Clicked(object sender, EventArgs e)
+        private async void newEntryBtn_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new EntradaPage());
+            await Navigation.PushAsync(new EntradaPage());
         }
     }
 }

@@ -4,7 +4,9 @@ using Plugin.Media.Abstractions;
 using PruebaXamarin.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
@@ -23,15 +25,29 @@ namespace PruebaXamarin.ViewModels
         private int _Cantidad;
         private ImageSource _Imagen;
         private Productos _selectedProducto;
+        private ObservableCollection<Productos>productos;
+        private int _Entrada;
         #endregion
 
 
         #region Propiedades
-        public List<Productos> _Productos { get; set; } = new List<Productos>();
-        public int Aumento { get; set; }
+
+        public int Entrada
+        {
+            get { return this._Entrada; }
+            set { SetValue(ref this._Entrada, value); }
+        }
+
+        public ObservableCollection<Productos> NewProductos;
+        public ObservableCollection<Productos> Productos
+        {
+            get { return this.productos; }
+            set { SetValue(ref this.productos, value); }
+        }
+
         public Productos SelectedProducto 
         {
-            get { return this._selectedProducto; ; }
+            get { return this._selectedProducto; }
             set { SetValue(ref this._selectedProducto, value); }
         }
 
@@ -75,6 +91,8 @@ namespace PruebaXamarin.ViewModels
         
 
         #region Methods
+        
+ 
 
         private async void OnClickPhoto()
         {
@@ -216,20 +234,14 @@ namespace PruebaXamarin.ViewModels
             Cantidad = Cantidad - 1;
         }
         #endregion
-        private void AumentarCantidad()
+        private async void AumentarCantidad()
         {
+
+            Repositorio repositorio = new Repositorio();
+            var result = await repositorio.GetProductosByIdAsync(SelectedProducto.Id);
+
+            SelectedProducto.Cantidad = result.Cantidad + Entrada;
             
-            Cantidad = SelectedProducto.Cantidad + Aumento;
-        //    var repositorio = new Repositorio();
-        //    var producto = new Productos()
-        //    {
-        //        Id = SelectedProducto.Id,
-        //        Nombre = SelectedProducto.Nombre,
-        //        Descripcion = SelectedProducto.Descripcion,
-        //        CodBarras = SelectedProducto.CodBarras,
-        //        Cantidad = SelectedProducto.Cantidad,
-        //        Img = SelectedProducto.Img
-        //    };
         }
 
 
@@ -276,7 +288,7 @@ namespace PruebaXamarin.ViewModels
                 return new RelayCommand(DeleteProducto);
             }
         }
-        public ICommand AumentarBtnCommand
+        public ICommand AumentarBtnCommand 
         {
             get
             {
