@@ -39,6 +39,7 @@
                     WidthRequest="155"
                     HorizontalOptions="FillAndExpand"/>
             <Button Text="Nueva&#10;Salida"
+                    x:Name="newOutBtn"
                     ImageSource="baseline_arrow_circle_up_white_24"
                     BackgroundColor="MidnightBlue"
                     TextColor="White"

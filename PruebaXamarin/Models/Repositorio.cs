@@ -47,7 +47,7 @@ namespace PruebaXamarin.Models
             }
         }
 
-        public async Task<HttpStatusCode> UpdateProducto(int? id,Productos producto)
+        public async Task<HttpStatusCode> UpdateProducto(int id,Productos producto)
         {
             try
             {
@@ -64,7 +64,7 @@ namespace PruebaXamarin.Models
 
                 throw;
             }
-            return default(HttpStatusCode);
+            return default;
         }
 
         public async Task<HttpStatusCode> DeleteProductoAsync(int? id)
@@ -83,7 +83,7 @@ namespace PruebaXamarin.Models
 
                 throw;
             }
-            return default(HttpStatusCode);
+            return default;
         }
 
         public async Task<HttpStatusCode> CreateProductoAsync(Productos producto)
@@ -104,7 +104,7 @@ namespace PruebaXamarin.Models
 
                 throw;
             }
-            return default(HttpStatusCode);
+            return default;
         }
 
     }

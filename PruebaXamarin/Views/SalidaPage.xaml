@@ -5,14 +5,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:PruebaXamarin.ViewModels"
              mc:Ignorable="d"
-             x:Class="PruebaXamarin.Views.EntradaPage"
-             Title="Nueva Entrada"
-             BackgroundColor="#AFD5DD"
-             Visual="Material">
-    
+             x:Class="PruebaXamarin.Views.SalidaPage"
+             Title="Nueva Salida"
+             Visual="Material"
+             BackgroundColor="#AFD5DD">
+
     <ContentPage.BindingContext>
         <vm:ProductoViewModel/>
     </ContentPage.BindingContext>
+    
     <ContentPage.Content>
         <StackLayout VerticalOptions="FillAndExpand">
             <Entry x:Name="cantTxt"
@@ -22,13 +23,13 @@
                    Text="{Binding Entrada, Mode=TwoWay}"
                    Margin="15,10,15,0"/>
             <Button Text="Añadir"
-                    Command="{Binding AumentarBtnCommand}"
+                    Command="{Binding SalidaCommand}"
                     BackgroundColor="MidnightBlue"
                     HorizontalOptions="Start"
                     Margin="15,0,0,0"/>
             <Label Text="Deslize hacia abajo la lista para refrescar los datos" HorizontalOptions="Center"/>
             <ActivityIndicator x:Name="indicador" HorizontalOptions="Center" VerticalOptions="Center"/>
-            
+
             <ListView x:Name="Lista" RefreshCommand="{Binding Productos}" IsPullToRefreshEnabled="True" ItemsSource="{Binding NewProductos}" SelectedItem="{Binding SelectedProducto, Mode=TwoWay}"  VerticalOptions="Center" Margin="15,0,15,15" BackgroundColor="#BDD2F1">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -41,8 +42,8 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button Text="Guardar Entrada"
-                    x:Name="volverBtn"
+            <Button Text="Guardar Salida"
+                    x:Name="VolverBtn"
                     BackgroundColor="MidnightBlue"
                     HorizontalOptions="Center"
                     VerticalOptions="End"

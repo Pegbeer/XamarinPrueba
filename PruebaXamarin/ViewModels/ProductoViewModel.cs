@@ -10,6 +10,7 @@ using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 namespace PruebaXamarin.ViewModels
@@ -38,7 +39,6 @@ namespace PruebaXamarin.ViewModels
             set { SetValue(ref this._Entrada, value); }
         }
 
-        public ObservableCollection<Productos> NewProductos;
         public ObservableCollection<Productos> Productos
         {
             get { return this.productos; }
@@ -88,11 +88,23 @@ namespace PruebaXamarin.ViewModels
         }
         #endregion
 
-        
+
 
         #region Methods
-        
- 
+
+        public ProductoViewModel()
+        {
+            _refreshCommand = new Command(RefreshListView);
+            Device.InvokeOnMainThreadAsync(async () =>
+            {
+                Productos = await PopulateLista();
+            });
+        }
+
+        async void RefreshListView(object obj)
+        {
+            Productos = await PopulateLista();
+        }
 
         private async void OnClickPhoto()
         {
@@ -239,9 +251,47 @@ namespace PruebaXamarin.ViewModels
 
             Repositorio repositorio = new Repositorio();
             var result = await repositorio.GetProductosByIdAsync(SelectedProducto.Id);
+            var cant = SelectedProducto.Cantidad;
+            var newCant = cant + Entrada;
+            var newProducto = new Productos()
+            {
+                Id = result.Id,
+                Nombre = result.Nombre,
+                Descripcion = result.Descripcion,
+                Cantidad = newCant,
+                Img = result.Img,
+                CodBarras = result.CodBarras
+            };
+            var response = await repositorio.UpdateProducto(result.Id, newProducto);
+            SelectedProducto = newProducto;
+            await App.Current.MainPage.DisplayAlert("INFO","Entrada realizada, deslice para actualizar los datos","Aceptar");
+        }
 
-            SelectedProducto.Cantidad = result.Cantidad + Entrada;
-            
+        private async void DisminuirCantidad()
+        {
+            Repositorio repositorio = new Repositorio();
+            var result = await repositorio.GetProductosByIdAsync(SelectedProducto.Id);
+            var cant = SelectedProducto.Cantidad;
+            var newCant = cant - Entrada;
+            var newProducto = new Productos()
+            {
+                Id = result.Id,
+                Nombre = result.Nombre,
+                Descripcion = result.Descripcion,
+                Cantidad = newCant,
+                Img = result.Img,
+                CodBarras = result.CodBarras
+            };
+            var response = await repositorio.UpdateProducto(result.Id, newProducto);
+            SelectedProducto = newProducto;
+            await App.Current.MainPage.DisplayAlert("INFO", "Salida realizada, deslice para actualizar los datos", "Aceptar");
+        }
+
+        private async Task<ObservableCollection<Productos>> PopulateLista()
+        {
+            Repositorio repo = new Repositorio();
+            productos = await repo.GetProductosAsync();
+            return productos;
         }
 
 
@@ -294,6 +344,21 @@ namespace PruebaXamarin.ViewModels
             {
                 return new RelayCommand(AumentarCantidad);
             }
+        }
+
+        public ICommand SalidaCommand
+        {
+            get
+            {
+                return new RelayCommand(DisminuirCantidad);
+            }
+        }
+
+
+        Command _refreshCommand;
+        public Command RefreshLista
+        {
+            get { return _refreshCommand; }
         }
         #endregion
 

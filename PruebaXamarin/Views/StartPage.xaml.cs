@@ -16,6 +16,12 @@ namespace PruebaXamarin.Views
         public StartPage()
         {
             InitializeComponent();
+            newOutBtn.Clicked += NewOutBtn_Clicked;
+        }
+
+        private async void NewOutBtn_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new SalidaPage());
         }
 
         private async void productsListBtn_Clicked(object sender, EventArgs e)

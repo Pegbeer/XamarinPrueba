@@ -1,10 +1,8 @@
-﻿using Android.Widget;
-using PruebaXamarin.Models;
+﻿using PruebaXamarin.Models;
 using PruebaXamarin.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,13 +12,25 @@ using Xamarin.Forms.Xaml;
 namespace PruebaXamarin.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ProductosListPage : ContentPage
+    public partial class SalidaPage : ContentPage
     {
-        public ProductosListPage()
+        public SalidaPage()
         {
             InitializeComponent();
-            
             BindingContext = new ProductoViewModel();
+            Lista.Refreshing += Lista_Refreshing;
+            VolverBtn.Clicked += VolverBtn_Clicked;
+        }
+
+        private async void VolverBtn_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync();
+        }
+
+        private void Lista_Refreshing(object sender, EventArgs e)
+        {
+            MostrarProductos();
+            Lista.IsRefreshing = false;
         }
 
         protected override void OnAppearing()
@@ -28,13 +38,6 @@ namespace PruebaXamarin.Views
             base.OnAppearing();
             MostrarProductos();
         }
-
-        protected override bool OnBackButtonPressed()
-        {
-            MostrarProductos();
-            return base.OnBackButtonPressed();
-        }
-
         private async void MostrarProductos()
         {
             indicador.IsVisible = true;
@@ -46,20 +49,6 @@ namespace PruebaXamarin.Views
             indicador.IsRunning = false;
             indicador.IsVisible = false;
         }
-
-        private void Add_Clicked(object sender, EventArgs e)
-        {
-
-            Navigation.PushAsync(new NewProductPage());
-        }
-
-        private async void Lista_ItemTapped(object sender, ItemTappedEventArgs e)
-        {
-            var Item = e.Item as Productos;
-            if (Item != null)
-            {
-                await Navigation.PushAsync(new EditProductoPage(Item) {});
-            }
-        }
     }
+    
 }

@@ -18,6 +18,19 @@ namespace PruebaXamarin.Views
         {
             InitializeComponent();
             BindingContext = new ProductoViewModel();
+            Lista.Refreshing += Lista_Refreshing;
+            volverBtn.Clicked += VolverBtn_Clicked;
+        }
+
+        private async void VolverBtn_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync();
+        }
+
+        private void Lista_Refreshing(object sender, EventArgs e)
+        {
+            MostrarProductos();
+            Lista.IsRefreshing = false;
         }
 
         protected override void OnAppearing()
