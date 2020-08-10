@@ -10,7 +10,7 @@
         <local:MasterPage x:Name="masterPage"/>
     </MasterDetailPage.Master>
     <MasterDetailPage.Detail>
-        <NavigationPage BarBackgroundColor="#001D48" BarTextColor="White">
+        <NavigationPage NavigationPage.HasBackButton="True" BarBackgroundColor="#001D48" BarTextColor="White">
             <x:Arguments>
                 <local:StartPage/>
             </x:Arguments>

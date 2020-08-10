@@ -33,5 +33,10 @@ namespace PruebaXamarin.Views
         {
             await Navigation.PushAsync(new EntradaPage());
         }
+
+        private async void LogsBtn_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ReportesPage());
+        }
     }
 }

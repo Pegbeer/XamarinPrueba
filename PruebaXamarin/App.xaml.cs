@@ -12,7 +12,7 @@ namespace PruebaXamarin
             InitializeComponent();
             
 
-            MainPage = new MainPage() { BackgroundColor = Color.FromHex("#AFD5DD")};
+            MainPage = new MainPage() { BackgroundColor = Color.FromHex("#AFD5DD") };
         }
 
         protected override void OnStart()

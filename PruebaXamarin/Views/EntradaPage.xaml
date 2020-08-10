@@ -18,6 +18,7 @@
             <Entry x:Name="cantTxt"
                    Placeholder="N°:"
                    BackgroundColor="White"
+                   Keyboard="Numeric"
                    PlaceholderColor="MidnightBlue"
                    Text="{Binding Entrada, Mode=TwoWay}"
                    Margin="15,10,15,0"/>

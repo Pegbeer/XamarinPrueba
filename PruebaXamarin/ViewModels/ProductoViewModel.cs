@@ -28,11 +28,37 @@ namespace PruebaXamarin.ViewModels
         private Productos _selectedProducto;
         private ObservableCollection<Productos>productos;
         private int _Entrada;
+        private int _IdLog;
+        private int _ProductoId;
+        private DateTime _Modificacion;
+        private string _Texto;
         #endregion
 
 
         #region Propiedades
+        public int IdLog
+        {
+            get { return this._IdLog; }
+            set { SetValue(ref this._IdLog, value); }
+        }
 
+        public int ProductoId
+        {
+            get { return this._ProductoId; }
+            set { SetValue(ref this._ProductoId, value); }
+        }
+        public DateTime Modificacion
+        {
+            get { return this._Modificacion; }
+            set { SetValue(ref this._Modificacion, value); }
+        }
+
+
+        public string Texto
+        {
+            get { return this._Texto; }
+            set { SetValue(ref this._Texto, value); }
+        }
         public int Entrada
         {
             get { return this._Entrada; }
@@ -50,6 +76,7 @@ namespace PruebaXamarin.ViewModels
             get { return this._selectedProducto; }
             set { SetValue(ref this._selectedProducto, value); }
         }
+
 
         public int Id
         {
@@ -111,7 +138,7 @@ namespace PruebaXamarin.ViewModels
             await CrossMedia.Current.Initialize();
             var file = await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions
             {
-                PhotoSize = PhotoSize.Full
+                PhotoSize = PhotoSize.Small
             });
 
             if (file == null)
@@ -150,6 +177,7 @@ namespace PruebaXamarin.ViewModels
         private async void UpdateProducto()
         {
             var repositorio = new Repositorio();
+            var log = new Logs();
             var producto = new Productos()
             {
                 Id = Id,
@@ -162,6 +190,10 @@ namespace PruebaXamarin.ViewModels
             var result = await repositorio.UpdateProducto(Id,producto);
             if (result == HttpStatusCode.OK)
             {
+                log.ProductoId = producto.Id;
+                log.Modificacion = DateTime.Now;
+                log.Texto = "Modificado";
+                await repositorio.CreateLogAsync(log);
                 await App.Current.MainPage.DisplayAlert("Info", $"Producto Actualizado", "Aceptar");
             }
             else
@@ -173,9 +205,14 @@ namespace PruebaXamarin.ViewModels
         private async void DeleteProducto()
         {
             var repositorio = new Repositorio();
+            var log = new Logs();
             var result = await repositorio.DeleteProductoAsync(Id);
             if (result == HttpStatusCode.OK)
             {
+                log.ProductoId = Id;
+                log.Modificacion = DateTime.Now;
+                log.Texto = "Eliminado";
+                await repositorio.CreateLogAsync(log);
                 await App.Current.MainPage.DisplayAlert("Info", $"Producto Eliminado", "Aceptar");
             }
             else

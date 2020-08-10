@@ -50,7 +50,8 @@
                     HorizontalOptions="FillAndExpand"/>
         </StackLayout>
         <StackLayout>
-            <Button 
+            <Button x:Name="LogsBtn"
+                    Clicked="LogsBtn_Clicked"
                     Text="Reportes"
                     ImageSource="baseline_description_white_36"
                     Margin="20,0,20,0"

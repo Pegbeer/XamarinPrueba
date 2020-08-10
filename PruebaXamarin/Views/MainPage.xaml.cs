@@ -21,7 +21,11 @@ namespace PruebaXamarin.Views
             var item = e.SelectedItem as MasterPageItem;
             if (item != null)
             {
-                Detail = new NavigationPage((Page)Activator.CreateInstance(item.TargetType));
+                Detail = new NavigationPage((Page)Activator.CreateInstance(item.TargetType))
+                {
+                    BarBackgroundColor = Color.FromHex("#001D48"),
+                    BarTextColor = Color.White,
+                };
                 masterPage.listView.SelectedItem = null;
                 IsPresented = false;
             }

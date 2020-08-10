@@ -16,8 +16,8 @@
             <ListView.ItemsSource>
                 <x:Array Type="{x:Type local:MasterPageItem}">
                     <local:MasterPageItem Title="Productos" IconSource="baseline_inbox_24" TargetType="{x:Type local:ProductosListPage}"/>
-                    <local:MasterPageItem Title="Reportes" IconSource="baseline_description_24" />
-                    <local:MasterPageItem Title="Perfil" IconSource="baseline_account_circle_24"/>
+                    <local:MasterPageItem Title="Reportes" IconSource="baseline_description_24"  TargetType="{x:Type local:ReportesPage}"/>
+                    <local:MasterPageItem Title="Perfil" IconSource="baseline_account_circle_24" />
                     <local:MasterPageItem Title="Configuracion" IconSource="baseline_settings_24"/>
                     <local:MasterPageItem Title="Cerrar Sesion" IconSource="baseline_login_24"/>
                 </x:Array>
@@ -25,7 +25,6 @@
 
             <ListView.Header>
                 <RelativeLayout>
-
                     <Frame x:Name="circleFrame" 
                            IsClippedToBounds="True"
                            HasShadow="False"
@@ -46,19 +45,6 @@
                         </Frame.CornerRadius>
                     </Frame>
                     
-                                <!--<Image
-                                     x:Name="imageCircleBack"
-                                     BackgroundColor="Maroon" 
-                                     HeightRequest="100" 
-                                     WidthRequest="100" 
-                                     RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=X, Factor=.5, Constant = 100}" 
-                                     RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Factor=0, Property=Y, Constant=30}" />-->
-                                <!--<Button BorderRadius="30" 
-                                        BackgroundColor="Red" 
-                                        HeightRequest="60"
-                                        WidthRequest="60" 
-                                        RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=circleFrame, Property=X, Factor=0,Constant=120}" 
-                                        RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Factor=0, Property=Y, Constant=70}" />-->
                     <Label Text="Usuario AyB"
                            TextColor="White" 
                            x:Name="nickname"

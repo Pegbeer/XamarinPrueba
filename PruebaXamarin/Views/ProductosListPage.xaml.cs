@@ -21,8 +21,13 @@ namespace PruebaXamarin.Views
             InitializeComponent();
             
             BindingContext = new ProductoViewModel();
+            Device.InvokeOnMainThreadAsync(() =>
+            {
+                NavigationPage.SetHasBackButton(this, true);
+            });
         }
 
+        
         protected override void OnAppearing()
         {
             base.OnAppearing();

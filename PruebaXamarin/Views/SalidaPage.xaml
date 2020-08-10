@@ -18,6 +18,7 @@
         <StackLayout VerticalOptions="FillAndExpand">
             <Entry x:Name="cantTxt"
                    Placeholder="N°:"
+                   Keyboard="Numeric"
                    BackgroundColor="White"
                    PlaceholderColor="MidnightBlue"
                    Text="{Binding Entrada, Mode=TwoWay}"
